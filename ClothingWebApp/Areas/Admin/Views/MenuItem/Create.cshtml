@@ -1,0 +1,108 @@
+﻿@model ClothingWebApp.Models.ViewModels.MenuItemViewModel
+@using ClothingWebApp.Extensions
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<br />
+<h2 class="text-info"> Create Your Item</h2>
+<br />
+
+<div class="container row">
+    <div class="col-8 border-right">
+        <form method="post" asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MenuItem.Name" class="col-form-label"></label>
+                <input asp-for="MenuItem.Name" class="form-control" />
+                <span asp-validation-for="MenuItem.Name" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="MenuItem.Description" class="col-form-label"></label>
+                <div class="textarea">
+                    @Html.TextAreaFor(m => m.MenuItem.Description)
+                </div>
+                <span asp-validation-for="MenuItem.Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MenuItem.Price" class="col-form-label"></label>
+                <input asp-for="MenuItem.Price" class="form-control" />
+                <span asp-validation-for="MenuItem.Price" class="text-danger"></span>
+            </div>
+
+            @*Category*@
+            <div class="form-group">
+                <label asp-for="MenuItem.CategoryId" class="col-form-label"></label>
+                <select asp-for="@Model.MenuItem.CategoryId" id="CategoryId"
+                        asp-items="Model.Categories.SelectListItems(Model.MenuItem.CategoryId)">
+                    class="form-control">
+                </select>
+            </div>
+
+            @*SubCategory*@
+
+            <div class="form-group">
+                <label asp-for="MenuItem.SubCategoryId" class="col-form-label"></label>
+                <select asp-for="@Model.MenuItem.SubCategoryId" name="SubCategoryId" id="SubCategoryId"
+                        asp-items="@(new SelectList(string.Empty,"Id","Name"))"
+                        class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MenuItem.Image" class="col-form-label"></label>
+                <input type="file" name="files" multiple class="form-control" />
+            </div>
+
+            @*enum weight*@
+
+            <div class="form-group">
+                <label asp-for="MenuItem.ItemWeight" class="col-form-label"></label>
+                <select asp-for="@Model.MenuItem.ItemWeight" asp-items="Html.GetEnumSelectList<MenuItem.ItemSize>()">
+                    class="form-control">
+                </select>
+            </div>
+            <div class="form-group row">
+                <div class="col-5">
+                    <partial name="_CreateAndBackToListButton" model="Model.MenuItem.Id" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+@section Scripts{
+    @*<script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: "lists",
+                menubar: 'file edit format'
+            });
+        </script>*@
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GetSubCategory();
+            $('#CategoryId').change(function () {
+                GetSubCategory();
+            });
+        });
+        function GetSubCategory() {
+            var url = '@Url.Content("~/")' + "Admin/MenuItem/GetSubCategory";
+            var ddlsoruce = '#CategoryId';
+            $.getJSON(url, { id: $(ddlsoruce).val() }, function (data) {
+                var items = '';
+                $('#SubCategoryId').empty();
+                $.each(data, function (i, subcategory) {
+                    items += "<option value='" + subcategory.value + "'>" + subcategory.text + "</option>";
+                });
+                $('#SubCategoryId').html(items);
+            })
+        }
+    </script>
+}
+
+@{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}

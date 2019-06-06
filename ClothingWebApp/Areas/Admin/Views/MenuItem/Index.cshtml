@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MenuItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<partial name="_CreateTableButtonPartial" />
+<br />
+<br />
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-sm table-dark">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(m => m.Id)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.Name)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.Description)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.Price)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.ItemWeight)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.Image)</th>
+                <th scope="col" class="float-right"> Edit ||   Details  ||   Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@Html.DisplayFor(m => item.Id)</th>
+                    <td>@Html.DisplayFor(m => item.Name)</td>
+                    <td>@Html.DisplayFor(m => item.Description)</td>
+
+                    <td>@Html.DisplayFor(m => item.Price)</td>
+                    
+                    <td>@Html.DisplayFor(m => item.ItemWeight)</td>
+            
+                    <td>
+                        <img src="@Html.DisplayFor(m=>item.Image)" alt="Image" width="200" height="190"/>
+                    </td>
+                    
+                    <td class="float-right"><partial name="_TableButtonPartial" model="item.Id" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>There is No Category</p>
+}

@@ -27,7 +27,8 @@ namespace ClothingWebApp.Models
             xxl = 5
         }
 
-        public int ItemWeight { get; set; }
+        public string ItemWeight { get; set; }
+
 
         public string Image { get; set; }
 
