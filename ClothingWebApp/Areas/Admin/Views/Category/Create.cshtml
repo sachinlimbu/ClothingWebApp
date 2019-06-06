@@ -1,8 +1,11 @@
-﻿@model Category
+﻿@model ClothingWebApp.Models.Category
 
 @{
     ViewData["Title"] = "Create";
 }
+@*<partial name="_StatusMessage" model="@" />*@
+
+
 <div class="container">
     <form method="post" asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>

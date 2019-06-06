@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SubCategory>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+<partial name="_CreateTableButtonPartial" />
+<br />
+<br />
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-sm table-dark">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(m => m.Id)</th>
+                <th scope="col">Brand</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.Category.Name)</th>
+
+
+                <th scope="col" class="float-right"> Edit ||   Details  ||   Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@Html.DisplayFor(m => item.Id)</th>
+                    <td>@Html.DisplayFor(m => item.Name)</td>
+                    <td>@Html.DisplayFor(m => item.Category.Name)</td>
+                    <td class="float-right"><partial name="_TableButtonPartial" model="item.Id" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>There is No Category</p>
+}
+

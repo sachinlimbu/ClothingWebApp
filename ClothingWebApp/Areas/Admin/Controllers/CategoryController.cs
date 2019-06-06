@@ -17,6 +17,9 @@ namespace ClothingWebApp.Areas.Admin.Controllers
         [BindProperty]
         public Category Category { get; set; }
 
+        [TempData]
+        public String Message { get; set; }
+
         public CategoryController(ApplicationDbContext context)
         {
             this.context = context;
@@ -32,6 +35,7 @@ namespace ClothingWebApp.Areas.Admin.Controllers
         //GET : CREATE
         public IActionResult Create()
         {
+            Message = "Hello";
             return View();
         }
 
@@ -41,7 +45,7 @@ namespace ClothingWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var createCategory = context.Categories.Add(Category);
+                context.Categories.Add(Category);
                 await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
