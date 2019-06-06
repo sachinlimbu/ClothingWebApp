@@ -28,6 +28,7 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
 <body>
     <header>
@@ -50,13 +51,60 @@
             </div>
         </div>
     </header>
+    <br />
+
     <div class="container-fluid">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
-            @RenderBody()
+            <!-- Top container -->
+            <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+                <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+            </div>
+            <!-- Sidebar/menu -->
+            <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar">
+                <br>
+                <div class="w3-container w3-row">
+                    <div class="w3-col s4">
+                        <img src="~/Images/Mike.png" class="w3-circle w3-margin-right" style="width:46px">
+                    </div>
+                    <div class="w3-col s8 w3-bar">
+                        <span>Welcome, <strong>Mike</strong></span><br>
+                        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+                        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+                        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+                    </div>
+                </div>
+                <hr>
+                <div class="w3-container">
+                    <h5>Dashboard</h5>
+                </div>
+                <div class="w3-bar-block">
+                    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i> Close Menu</a>
+
+                    <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="w3-bar-item w3-button w3-padding"><i class="fas fa-border-all"></i>&nbsp;&nbsp;Category</a>
+
+                    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Overview</a>
+                    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Views</a>
+                    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Traffic</a>
+
+                </div>
+            </nav>
+            <!-- Overlay effect when opening sidebar on small screens -->
+            <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+            <!-- !PAGE CONTENT! -->
+            <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+                <!-- Header -->
+                @*<header class="w3-container" style="padding-top:22px">
+                        <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+                    </header>*@
+                <!--Contain goes here-->
+                @RenderBody()
+                <!-- End page content -->
+            </div>
         </main>
     </div>
-
 
     <div class="container">
         <footer class="border-top footer text-muted">
@@ -71,6 +119,7 @@
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
     </environment>
     <environment exclude="Development">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -87,6 +136,7 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/a1b3c5cc28.js"></script>
     <script>
         // Used to toggle the menu on small screens when clicking on the menu button
         function myFunction() {
@@ -97,6 +147,29 @@
                 x.className = x.className.replace(" w3-show", "");
             }
         }
+        // Get the Sidebar
+        var mySidebar = document.getElementById("mySidebar");
+
+        // Get the DIV with overlay effect
+        var overlayBg = document.getElementById("myOverlay");
+
+        // Toggle between showing and hiding the sidebar, and add overlay effect
+        function w3_open() {
+            if (mySidebar.style.display === 'block') {
+                mySidebar.style.display = 'none';
+                overlayBg.style.display = "none";
+            } else {
+                mySidebar.style.display = 'block';
+                overlayBg.style.display = "block";
+            }
+        }
+
+        // Close the sidebar with the close button
+        function w3_close() {
+            mySidebar.style.display = "none";
+            overlayBg.style.display = "none";
+        }
+
     </script>
     @RenderSection("Scripts", required: false)
 </body>

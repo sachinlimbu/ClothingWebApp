@@ -8,6 +8,7 @@ using ClothingWebApp.Models;
 
 namespace ClothingWebApp.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         public IActionResult Index()
