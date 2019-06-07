@@ -1,14 +1,20 @@
-﻿@{
+﻿@model ClothingWebApp.Models.ViewModels.IndexViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <br />
 <br />
 <br />
+<br />
+<br />
 
-<div class="container">
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    </div>
+    @foreach (var category in Model.Categories)
+    {
+        <div class="row" id="menu-wrapper">
+            <partial name="_ThumbnailAreaPartial" model="@Model.MenuItems.Where(x => x.Category.Name.Equals(category.Name))" />
+        </div>
+    }
+
 </div>

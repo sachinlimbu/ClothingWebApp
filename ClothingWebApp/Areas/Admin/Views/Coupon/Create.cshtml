@@ -1,0 +1,59 @@
+﻿@model ClothingWebApp.Models.Coupon
+@using ClothingWebApp.Extensions
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<br />
+<h2 class="text-info"> Create Your Events</h2>
+<br />
+
+<div class="container row">
+    <div class="col-8 border-right">
+        <form method="post" asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="col-form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Picture" class="col-form-label"></label>
+                <input type="file" id="projectImage" name="files" multiple class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CouponType" class="col-form-label"></label>
+                <select asp-for="CouponType" asp-items="Html.GetEnumSelectList<Coupon.ECouponType>()" class="form-control"></select>
+            </div>
+
+            @*Category*@
+            <div class="form-group">
+                <label asp-for="Discount" class="col-form-label"></label>
+                <input asp-for="Discount" class="form-control" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MinimumAmount" class="col-form-label"></label>
+                <input asp-for="MinimumAmount" class="form-control" />
+                <span asp-validation-for="MinimumAmount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IsActive" class="col-form-label"></label>
+                <input type="checkbox" asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="MinimumAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-5">
+                    <partial name="_CreateAndBackToListButton"/>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

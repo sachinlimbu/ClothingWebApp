@@ -14,6 +14,10 @@ namespace ClothingWebApp.Data
 
         public DbSet<MenuItem> MenuItems { get; set; }
 
+        public DbSet<Coupon> coupons { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

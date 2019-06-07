@@ -41,7 +41,7 @@
                 <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
                 @*<a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>*@
                 @*<a asp-area="Customer" asp-controller="Home" asp-action="Privacy" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Privacy </a>*@
-                <a asp-area="Admin" asp-controller="MainMenuAdmin" asp-action="Index" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Admin</a>
+                <a asp-area="Admin" asp-controller="MenuItem" asp-action="Index" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Admin</a>
                 <partial name="_LoginPartial" />
             </div>
             <!-- Navbar on small screens -->
@@ -84,10 +84,7 @@
                     <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="w3-bar-item w3-button w3-padding"><i class="fas fa-border-all"></i>&nbsp;&nbsp;Category</a>
                     <a asp-area="Admin" asp-controller="SubCategory" asp-action="Index" class="w3-bar-item w3-button w3-padding"><i class="fas fa-industry"></i>&nbsp;&nbsp;Make</a>
                     <a asp-area="Admin" asp-controller="MenuItem" asp-action="Index" class="w3-bar-item w3-button w3-padding"><i class="fas fa-store"></i>&nbsp;&nbsp;Item Database</a>
-                    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Overview</a>
-                    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Views</a>
-                    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Traffic</a>
-
+                    <a asp-area="Admin" asp-controller="Coupon" asp-action="Index" class="w3-bar-item w3-button w3-padding"><i class="fas fa-calendar-alt"></i>&nbsp;&nbsp;Events</a>
                 </div>
             </nav>
             <!-- Overlay effect when opening sidebar on small screens -->

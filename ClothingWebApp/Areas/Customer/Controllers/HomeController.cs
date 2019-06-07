@@ -5,15 +5,34 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ClothingWebApp.Models;
+using ClothingWebApp.Models.ViewModels;
+using ClothingWebApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClothingWebApp.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext context;
+
+        public HomeController(ApplicationDbContext context)
         {
-            return View();
+           
+            this.context = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            IndexViewModel indexViewModel = new IndexViewModel
+            {
+                MenuItems = await context.MenuItems.Include(m => m.Category).Include(m => m.SubCategory).ToListAsync(),
+                Categories = await context.Categories.ToListAsync(),
+                Coupons = await context.coupons.Where(c => c.IsActive == true).ToListAsync()
+            };
+
+
+            return View(indexViewModel);
         }
 
         public IActionResult Privacy()
